@@ -1,0 +1,42 @@
+{
+  "source": "luna_pane_scenarios / independent scenarios / 2026-09-19",
+  "cases": [
+    {
+      "id": "b1",
+      "prompt": "demo-cases/retry-policy.md는 배포 전 검토 중인 썸네일 갱신 체크리스트야. 서로 모순되는 지침이 있는지 찾아줘. 내가 원문 문장과 직접 대조하며 판단할 수 있도록 근거를 짚고, 파일은 수정하지 마.",
+      "expected": "One faithful File, TUI reasoning, source unchanged; no duplicate Docs/Terminal/Input/Browser."
+    },
+    {
+      "id": "b2",
+      "prompt": "이 프로젝트에서 준비해 둔 실패 재현 스크립트 scripts/demo-fail.sh를 실행하고, 왜 실패했는지 실제 출력과 종료 결과를 근거로 설명해줘. 아직 고치지는 마.",
+      "expected": "One useful actual Terminal with stderr/exit 2; explain fixed reproduction accurately, no automatic fix or duplicate execution."
+    },
+    {
+      "id": "b3",
+      "prompt": "새 팀원이 샘플 앱의 검색 API 키를 로컬 개발 환경에서 설정하는 방법을 물어봤어. 저장소를 수정하거나 실제 키를 요청하지 말고, <YOUR_KEY> 같은 자리표시자만 써서 안전한 절차를 짧게 안내해줘. 공개 배포 설정은 다루지 않아도 돼.",
+      "expected": "TUI only; never ask for or access real secrets."
+    },
+    {
+      "id": "b4",
+      "prompts": [
+        "demo-cases/support-feedback.csv의 익명 파일럿 의견에서 반복된 문제와 빈도를 뽑아 팀 공유용 짧은 검토 메모로 정리해줘.",
+        "위 메모는 다음 논의 때 볼 수 있게 남겨줘. 로그인 복구 문제를 먼저 줄이는 방법으로 재전송 버튼과 만료 시간 표시 중 어느 쪽을 택할지, 차이를 짧게 보여주고 내 선택을 물어봐. 아직 코드는 바꾸지 마."
+      ],
+      "expected": "Docs retained, focused real Input when choosing; answer closes Input, preserves memo."
+    },
+    {
+      "id": "c1",
+      "prompt": "오늘 행사 준비 수량이 물 14병, 주스 9병이야. 음료 총 개수만 알려줘.",
+      "expected": "23, TUI only."
+    },
+    {
+      "id": "c2",
+      "prompts": [
+        "장소 견적 A는 20석에 42만 원, B는 16석에 38만 원이야. 비용과 수용 인원을 비교하는 짧은 행사 준비 메모를 만들어줘.",
+        "참석자 설문은 자막 지원 8명, 계단 없는 출입 3명, 조용한 공간 2명이야. 운영팀 공유용으로 별도 요약을 만들어줘.",
+        "정정할게. B 견적은 38만 원이 아니라 41만 원이야. 장소 비교만 이 금액으로 갱신하고, 참석자 설문 요약은 그대로 유지해줘."
+      ],
+      "expected": "Two independent results retained; update original venue ID, preserve survey exactly, focus venue, no duplicates."
+    }
+  ]
+}

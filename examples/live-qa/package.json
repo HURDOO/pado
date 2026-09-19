@@ -1,0 +1,7 @@
+{
+  "name": "pado-live-qa",
+  "private": true,
+  "type": "module",
+  "scripts": { "dev": "node server.mjs", "test": "node --test api.test.mjs" },
+  "dependencies": { "@vitejs/plugin-react": "6.1.1", "vite": "8.3.0", "react": "19.2.8", "react-dom": "19.2.8" }
+}

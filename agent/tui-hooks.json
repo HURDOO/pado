@@ -1,0 +1,17 @@
+{
+  "pado-stage": {
+    "PreInvocation": [{ "command": "node /opt/pado/tui-hooks.mjs start", "timeout": 5 }],
+    "PostInvocation": [{ "command": "node /opt/pado/tui-hooks.mjs progress", "timeout": 5 }],
+    "PostToolUse": [
+      {
+        "matcher": "run_command",
+        "hooks": [{ "command": "node /opt/pado/tui-hooks.mjs command-return", "timeout": 5 }]
+      },
+      {
+        "matcher": "invoke_subagent|manage_subagents|send_message",
+        "hooks": [{ "command": "node /opt/pado/tui-hooks.mjs tool", "timeout": 5 }]
+      }
+    ],
+    "Stop": [{ "command": "node /opt/pado/tui-hooks.mjs stop", "timeout": 5 }]
+  }
+}

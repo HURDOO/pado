@@ -1,0 +1,47 @@
+{
+  "name": "pado",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.12.0",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "tsx --env-file-if-exists=.env server/index.ts",
+    "start": "tsx --env-file-if-exists=.env server/index.ts --production",
+    "build": "pnpm --dir web build",
+    "typecheck": "tsc --noEmit && pnpm --dir web exec tsc -b",
+    "format": "prettier --write server shared tests scripts agent/present.mjs web/src web/index.html 'playwright*.config.ts'",
+    "format:check": "prettier --check server shared tests scripts agent/present.mjs web/src web/index.html 'playwright*.config.ts'",
+    "lint": "oxlint server shared tests && pnpm --dir web lint",
+    "test": "tsx --test tests/*.test.ts",
+    "test:runner": "tsx tests/runner.smoke.ts",
+    "test:apps": "tsx --test tests/app-runtime.smoke.ts",
+    "test:shell": "tsx --test tests/shell.smoke.ts",
+    "test:load": "pnpm build && tsx tests/load.smoke.ts",
+    "agent:login": "node --env-file-if-exists=.env scripts/agent-login.mjs",
+    "setup:local": "node scripts/setup-local.mjs",
+    "agent:check": "tsx --env-file-if-exists=.env scripts/agent-check.ts",
+    "test:e2e": "PLAYWRIGHT_BROWSERS_PATH=.cache/playwright playwright test",
+    "test:agent": "PLAYWRIGHT_BROWSERS_PATH=.cache/playwright playwright test --config playwright.agent.config.ts",
+    "test:public-browser": "PLAYWRIGHT_BROWSERS_PATH=.cache/playwright playwright test --config playwright.public.config.ts",
+    "test:public-network": "tsx tests/public-network.smoke.ts",
+    "test:public-agent": "PADO_AGENT_IMAGE=pado-agent:public-candidate tsx tests/public-agent.smoke.ts",
+    "test:public-subagent": "PADO_AGENT_IMAGE=pado-agent:public-candidate tsx tests/public-subagent.smoke.ts",
+    "check": "pnpm typecheck && pnpm lint && pnpm test && pnpm build"
+  },
+  "dependencies": {
+    "@xterm/addon-serialize": "^0.14.0",
+    "@xterm/headless": "^6.0.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@types/node": "^24.13.3",
+    "oxlint": "^1.81.0",
+    "prettier": "^3.9.7",
+    "tsx": "^4.21.0",
+    "typescript": "~6.0.2",
+    "vite": "^8.3.0"
+  }
+}

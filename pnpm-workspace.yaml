@@ -1,0 +1,6 @@
+packages:
+  - web
+allowBuilds:
+  esbuild: true
+storeDir: .cache/pnpm-store
+cacheDir: .cache/pnpm

@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>다음 아이디어</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --primary-light: #eff6ff;
+      --accent: #3b82f6;
+      --accent-glow: rgba(59, 130, 246, 0.35);
+      --bg: #091124;
+      --surface: #101c3d;
+      --surface-card: #162652;
+      --surface-card-hover: #1c326b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --border: #22376e;
+      --radius: 12px;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+      --like-color: #f43f5e;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 24px 16px;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(37, 99, 235, 0.18) 0%, transparent 45%),
+        radial-gradient(circle at 85% 85%, rgba(59, 130, 246, 0.15) 0%, transparent 45%);
+    }
+
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .brand-text h1 {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .theme-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(37, 99, 235, 0.25);
+      border: 1px solid var(--accent);
+      color: #93c5fd;
+      font-size: 13px;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-weight: 600;
+    }
+
+    .brand-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .stats {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .stat-badge {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px 16px;
+      font-size: 13px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .stat-badge strong {
+      color: #60a5fa;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    /* Input Form Section */
+    .form-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 24px;
+      margin-bottom: 32px;
+      box-shadow: var(--shadow);
+    }
+
+    .form-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #93c5fd;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      cursor: pointer;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    @media (max-width: 640px) {
+      .input-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+
+    .input-wrapper {
+      flex: 1;
+      position: relative;
+    }
+
+    .idea-input {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      background: #091124;
+      color: var(--text);
+      font-size: 15px;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .idea-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    .idea-input::placeholder {
+      color: var(--text-dim);
+    }
+
+    .btn-add {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      padding: 14px 28px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+    }
+
+    .btn-add:hover {
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(37, 99, 235, 0.55);
+    }
+
+    .btn-add:active {
+      transform: translateY(0);
+    }
+
+    /* Cards Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      position: relative;
+      overflow: hidden;
+      animation: cardAppear 0.35s ease forwards;
+    }
+
+    @keyframes cardDisappear {
+      from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      to {
+        opacity: 0;
+        transform: translateY(-8px) scale(0.92);
+      }
+    }
+
+    .card.deleting {
+      animation: cardDisappear 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      pointer-events: none;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #2563eb, #60a5fa);
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      background: var(--surface-card-hover);
+      border-color: #3b82f6;
+      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.25);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-tag {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: rgba(59, 130, 246, 0.18);
+      color: #93c5fd;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    .card-time {
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    .btn-delete {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--text-dim);
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s ease;
+      outline: none;
+    }
+
+    .btn-delete:hover {
+      background: rgba(244, 63, 94, 0.18);
+      border-color: rgba(244, 63, 94, 0.4);
+      color: #fda4af;
+      transform: scale(1.04);
+    }
+
+    .btn-delete:active {
+      transform: scale(0.96);
+    }
+
+    .card-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+      line-height: 1.45;
+      word-break: break-word;
+    }
+
+    .card-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin-bottom: 20px;
+      word-break: break-word;
+      flex-grow: 1;
+    }
+
+    .card-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .card-author {
+      font-size: 13px;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-like {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      outline: none;
+    }
+
+    .btn-like:hover {
+      background: rgba(244, 63, 94, 0.15);
+      border-color: rgba(244, 63, 94, 0.4);
+      color: #fda4af;
+      transform: scale(1.05);
+    }
+
+    .btn-like.liked {
+      background: rgba(244, 63, 94, 0.2);
+      border-color: var(--like-color);
+      color: #f43f5e;
+    }
+
+    .heart-icon {
+      display: inline-block;
+      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .btn-like:active .heart-icon {
+      transform: scale(1.35);
+    }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 48px 24px;
+      background: var(--surface);
+      border: 1px dashed var(--border);
+      border-radius: var(--radius);
+      margin-top: 10px;
+    }
+
+    .empty-icon {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .empty-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    .empty-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand-section">
+        <div class="brand-icon">💡</div>
+        <div class="brand-text">
+          <h1>
+            다음 아이디어 보드
+            <span class="theme-badge">선명한 파랑 🌊</span>
+          </h1>
+          <p class="brand-desc">이 브라우저에서만 독립적으로 체험하는 로컬 미리보기 보드입니다 (아이디어·좋아요 조작은 개인별로 독립 동작)</p>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat-badge">
+          아이디어 <strong id="totalIdeas">3</strong>개
+        </div>
+        <div class="stat-badge">
+          총 좋아요 <strong id="totalLikes">35</strong>개
+        </div>
+      </div>
+    </header>
+
+    <section class="form-card">
+      <form id="ideaForm" onsubmit="handleAddIdea(event)">
+        <label for="newIdeaInput" class="form-title">새 아이디어</label>
+        <div class="input-row">
+          <div class="input-wrapper">
+            <input 
+              id="newIdeaInput" 
+              type="text" 
+              class="idea-input" 
+              placeholder="해커톤에서 구현하고 싶은 기발한 아이디어를 입력하세요..." 
+              required
+              autocomplete="off"
+            >
+          </div>
+          <button id="addIdeaBtn" type="submit" class="btn-add">추가</button>
+        </div>
+      </form>
+    </section>
+
+    <main id="boardGrid" class="grid" aria-live="polite">
+      <!-- 초기 아이디어 카드 3개 -->
+      <article class="card" data-id="1">
+        <div class="card-top">
+          <span class="card-tag">AI / DevTools</span>
+          <div class="card-meta">
+            <span class="card-time">10분 전</span>
+            <button type="button" class="btn-delete" onclick="deleteIdea(this)" aria-label="아이디어 삭제" title="아이디어 삭제">
+              <span class="delete-icon">🗑️</span>
+              <span class="delete-label">삭제</span>
+            </button>
+          </div>
+        </div>
+        <h2 class="card-title">AI 페어 프로그래밍 피드백 봇</h2>
+        <p class="card-desc">코드 작성 중 실시간으로 병목 구간을 감지하고 최적화 방안과 테스트 케이스를 자동 제안해주는 경량 협업 어시스턴트</p>
+        <div class="card-bottom">
+          <span class="card-author">팀 알파</span>
+          <button type="button" class="btn-like" onclick="toggleLike(this, 1)" aria-label="좋아요">
+            <span class="heart-icon">❤️</span>
+            <span class="like-count">12</span>
+          </button>
+        </div>
+      </article>
+
+      <article class="card" data-id="2">
+        <div class="card-top">
+          <span class="card-tag">Social / Local</span>
+          <div class="card-meta">
+            <span class="card-time">25분 전</span>
+            <button type="button" class="btn-delete" onclick="deleteIdea(this)" aria-label="아이디어 삭제" title="아이디어 삭제">
+              <span class="delete-icon">🗑️</span>
+              <span class="delete-label">삭제</span>
+            </button>
+          </div>
+        </div>
+        <h2 class="card-title">캠퍼스 길고양이 돌봄 다이어리</h2>
+        <p class="card-desc">교내 길고양이들의 식사 주기와 백신 접종 이력을 지도 기반으로 학생들이 함께 기록하고 공유하는 인터랙티브 웹앱</p>
+        <div class="card-bottom">
+          <span class="card-author">냥냥보호단</span>
+          <button type="button" class="btn-like" onclick="toggleLike(this, 2)" aria-label="좋아요">
+            <span class="heart-icon">❤️</span>
+            <span class="like-count">8</span>
+          </button>
+        </div>
+      </article>
+
+      <article class="card" data-id="3">
+        <div class="card-top">
+          <span class="card-tag">Eco / Life</span>
+          <div class="card-meta">
+            <span class="card-time">1시간 전</span>
+            <button type="button" class="btn-delete" onclick="deleteIdea(this)" aria-label="아이디어 삭제" title="아이디어 삭제">
+              <span class="delete-icon">🗑️</span>
+              <span class="delete-label">삭제</span>
+            </button>
+          </div>
+        </div>
+        <h2 class="card-title">스마트 제로웨이스트 냉장고 트래커</h2>
+        <p class="card-desc">영수증 OCR로 식재료 유통기한을 자동 인식하고, 임박한 재료를 소진할 수 있는 맞춤형 즉석 레시피를 추천하는 서비스</p>
+        <div class="card-bottom">
+          <span class="card-author">그린어스</span>
+          <button type="button" class="btn-like" onclick="toggleLike(this, 3)" aria-label="좋아요">
+            <span class="heart-icon">❤️</span>
+            <span class="like-count">15</span>
+          </button>
+        </div>
+      </article>
+
+      <div id="emptyState" class="empty-state" style="display: none;">
+        <div class="empty-icon">💡</div>
+        <p class="empty-title">등록된 아이디어가 없습니다</p>
+        <p class="empty-desc">위 입력창에서 새로운 아이디어를 제안해 보세요!</p>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    let nextId = 4;
+
+    function updateStats() {
+      const cards = document.querySelectorAll('.card:not(.deleting)');
+      document.getElementById('totalIdeas').textContent = cards.length;
+
+      let totalLikes = 0;
+      cards.forEach(card => {
+        const el = card.querySelector('.like-count');
+        if (el) {
+          totalLikes += parseInt(el.textContent, 10) || 0;
+        }
+      });
+      document.getElementById('totalLikes').textContent = totalLikes;
+
+      const emptyEl = document.getElementById('emptyState');
+      if (emptyEl) {
+        emptyEl.style.display = cards.length === 0 ? 'block' : 'none';
+      }
+    }
+
+    function toggleLike(btn, id) {
+      const countEl = btn.querySelector('.like-count');
+      let count = parseInt(countEl.textContent, 10) || 0;
+      const isLiked = btn.classList.contains('liked');
+
+      if (isLiked) {
+        btn.classList.remove('liked');
+        countEl.textContent = count - 1;
+      } else {
+        btn.classList.add('liked');
+        countEl.textContent = count + 1;
+      }
+      updateStats();
+    }
+
+    function deleteIdea(btn) {
+      const card = btn.closest('.card');
+      if (!card) return;
+
+      card.classList.add('deleting');
+      setTimeout(() => {
+        card.remove();
+        updateStats();
+      }, 240);
+    }
+
+    function handleAddIdea(e) {
+      e.preventDefault();
+      const input = document.getElementById('newIdeaInput');
+      const ideaText = input.value.trim();
+      if (!ideaText) return;
+
+      const grid = document.getElementById('boardGrid');
+      const card = document.createElement('article');
+      card.className = 'card';
+      card.setAttribute('data-id', nextId);
+
+      const id = nextId++;
+      card.innerHTML = `
+        <div class="card-top">
+          <span class="card-tag">새 제안</span>
+          <div class="card-meta">
+            <span class="card-time">방금 전</span>
+            <button type="button" class="btn-delete" onclick="deleteIdea(this)" aria-label="아이디어 삭제" title="아이디어 삭제">
+              <span class="delete-icon">🗑️</span>
+              <span class="delete-label">삭제</span>
+            </button>
+          </div>
+        </div>
+        <h2 class="card-title">${escapeHtml(ideaText)}</h2>
+        <p class="card-desc">이 브라우저에서만 독립적으로 확인하고 조작할 수 있는 로컬 미리보기 카드입니다.</p>
+        <div class="card-bottom">
+          <span class="card-author">참가자</span>
+          <button type="button" class="btn-like" onclick="toggleLike(this, ${id})" aria-label="좋아요">
+            <span class="heart-icon">❤️</span>
+            <span class="like-count">0</span>
+          </button>
+        </div>
+      `;
+
+      grid.prepend(card);
+      input.value = '';
+      input.focus();
+      updateStats();
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // 초기 통계 동기화
+    updateStats();
+  </script>
+</body>
+</html>

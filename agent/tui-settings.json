@@ -1,0 +1,10 @@
+{
+  "altScreenMode": "always",
+  "colorScheme": "dark",
+  "notifications": false,
+  "trustedWorkspaces": ["/workspace"],
+  "permissions": {
+    "allow": ["read_file(/workspace)", "write_file(/workspace)", "read_file(/bridge)", "read_file(/opt/pado/present.mjs)", "command(node /opt/pado/present.mjs)"],
+    "deny": ["read_file(/auth)", "write_file(/auth)", "read_file(/home/node/.gemini)", "write_file(/home/node/.gemini)", "write_file(/opt/pado)"]
+  }
+}

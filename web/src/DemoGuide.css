@@ -1,0 +1,114 @@
+.demo-guide {
+  position: fixed;
+  right: max(20px, env(safe-area-inset-right));
+  bottom: max(20px, env(safe-area-inset-bottom));
+  z-index: 8;
+  width: min(336px, calc(100vw - 32px));
+  display: flex;
+  justify-content: flex-end;
+  pointer-events: none;
+}
+.demo-guide-card {
+  pointer-events: auto;
+  width: 100%;
+  max-height: 55dvh;
+  overflow: auto;
+  padding: 12px 16px 17px;
+  border: 1px solid #3b567c;
+  border-radius: 13px;
+  background: #192536;
+  box-shadow: 0 12px 36px #0005;
+}
+.demo-guide-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+.demo-guide-header > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #9dc4ff;
+  font-size: 11px;
+}
+.demo-guide-header .icon-button {
+  min-width: 32px;
+  min-height: 32px;
+  color: #b6c5d9;
+  margin-right: -6px;
+}
+.demo-guide h2 {
+  margin: 0;
+  color: #eef4ff;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: -0.3px;
+  word-break: keep-all;
+}
+.demo-guide p {
+  margin: 8px 0 0;
+  color: #bac9df;
+  font-size: 13px;
+  line-height: 1.8;
+  word-break: keep-all;
+}
+.demo-guide-launcher {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 36px;
+  padding: 8px 12px;
+  border: 1px solid #3b567c;
+  border-radius: 20px;
+  background: #192536;
+  color: #b9d4ff;
+  font-size: 12px;
+  box-shadow: 0 4px 14px #0003;
+}
+.demo-guide-launcher:hover {
+  background: #253951;
+}
+@media (min-width: 851px) and (min-height: 601px) {
+  .app-shell:has(.tui-keys, .native-speaker-controls) .demo-guide {
+    bottom: 128px;
+  }
+}
+
+/* Reserve space on phones and short screens instead of covering the input controls. */
+@media (max-width: 850px), (max-height: 600px) {
+  .demo-guide {
+    position: relative;
+    inset: auto;
+    grid-column: 2;
+    grid-row: 3;
+    justify-self: end;
+    width: min(336px, calc(100% - 16px));
+    margin: 0 8px max(8px, env(safe-area-inset-bottom));
+  }
+  .demo-guide-card {
+    height: 156px;
+    padding: 8px 12px 12px;
+    border-radius: 10px;
+    box-shadow: none;
+  }
+  .demo-guide-header {
+    margin-bottom: 2px;
+  }
+  .demo-guide h2 {
+    font-size: 14px;
+  }
+  .demo-guide p {
+    margin-top: 5px;
+    font-size: 12px;
+    line-height: 1.7;
+  }
+}
+@media (max-width: 850px) {
+  .demo-guide {
+    grid-column: 1;
+  }
+}

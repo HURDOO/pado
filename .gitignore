@@ -1,0 +1,13 @@
+node_modules/
+.cache/
+.pnpm-store/
+.pado/
+.env
+*.secret
+.env.*
+!.env.example
+web/dist/
+playwright-report/
+test-results/
+*.log
+.DS_Store

@@ -1,0 +1,26 @@
+{
+  "source": "luna_pane_scenarios / PROJECT_BRIEF independent review / 2026-09-19",
+  "cases": [
+    {
+      "id": "luna-s1",
+      "prompt": "아래 네 번의 응답 시간(초)을 보고 평균과 가장 느린 값을 알려줘: 월 18, 화 25, 수 19, 목 22. 계산 결과만 짧게 답해줘.",
+      "expected": "Agent only, 21 and 25 seconds; no public pane for internal calculation."
+    },
+    {
+      "id": "luna-s2",
+      "prompt": "로그인 없는 내부 도구의 첫 화면 문구 방향을 정하고 싶어. 편안하게 안내하는 안과 바로 첫 작업을 유도하는 안, 두 가지의 짧은 문구와 장단점을 정리해줘. 내가 고르기 전에는 적용하지 말고 기다려.",
+      "expected": "Two understandable alternatives; Input when awaiting actual choice, supporting Docs if useful; no Terminal/File/Browser; close answered Input and emphasize the decision."
+    },
+    {
+      "id": "luna-s3",
+      "prompt": "src/demo/greeting.ts에서 이름이 빈 문자열이면 `Hello, friend!`를 반환하게 해줘. 다른 이름의 동작은 유지하고, 프로젝트의 빠른 타입 검사를 실행해 결과를 알려줘.",
+      "expected": "No File just for edits. Only meaningful real check output in Terminal, then close or shrink it. No mandatory plan Docs/Input/Browser."
+    },
+    {
+      "id": "luna-s4",
+      "prompt": "demo-cases/counter.html의 작은 카운터 페이지를 보기 쉽게 다듬고, 프로젝트의 로컬 미리보기 환경에서 버튼을 몇 번 눌러 숫자가 제대로 올라가는지 확인해줘.",
+      "followup": "확인은 끝났어. 바뀐 점과 동작 결과를 세 문장으로 요약해줘. 이번 확인을 위해서만 시작한 임시 작업이 있으면 마무리해줘.",
+      "expected": "Browser is prominent when runnable result ready; real preparation output is temporary; no File/Docs/Input. Follow-up cleans temporary panes and its own server, retaining work files and Pado."
+    }
+  ]
+}
